@@ -114,4 +114,19 @@ router.delete('/:id', (req, res) => {
   });
 });
 
+router.post('/:id/addStep', (req,res)=> {
+  const newStep = req.body;
+  const id = req.params.id
+  console.log(id)
+  const step = {
+    scheme_id: id,
+    step_number: newStep.step_number,
+    instructions: newStep.instructions
+  }
+  console.log(step)
+  Schemes.addStep(step, id)
+    .then(newId => res.status(200).json(newId))
+    .catch(err => res.status(500).json({messgae: "failed to add a step"}))
+})
+
 module.exports = router;
