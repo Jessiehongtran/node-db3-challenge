@@ -19,11 +19,11 @@ function findById(id){
     return db('schemes').where({id: Number(id)})
 }
 
-function findSteps(id){
+function findSteps(schemeId){
     return db('steps')
-        .join('schemes', 'schemes.id','steps.scheme_id')
-        .select('schemes.scheme_name', 'step_number', 'instructions')
-        .where('id', Number(id))
+        .join('schemes', 'schemes.id','scheme_id')
+        .select('schemes.*', 'step_number', 'instructions')
+        .where('scheme_id', Number(schemeId))
 }
 
 function add(scheme){
